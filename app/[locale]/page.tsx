@@ -40,8 +40,8 @@ import LocaleSwitcher from '../components/localeSwitcher/LocaleSwitcher';
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState<boolean>(false);
 
   // SOLUTION 1: Créer deux refs séparées
-  const cvPreviewRef = useRef<HTMLDivElement>(null);
-  const modalPreviewRef = useRef<HTMLDivElement>(null);
+ const cvPreviewRef = useRef<HTMLDivElement>(null);
+const modalPreviewRef = useRef<HTMLDivElement>(null);
 
   const themes = [
     'light', 'dark', 'cupcake', 'bumblebee', 'emerald', 'corporate',
@@ -179,6 +179,7 @@ import LocaleSwitcher from '../components/localeSwitcher/LocaleSwitcher';
                 isPreviewModalOpen={isPreviewModalOpen}
                 setIsPreviewModalOpen={setIsPreviewModalOpen}
                 download={true}
+                 
                 ref={cvPreviewRef} // Utiliser la première ref
               />
             </div>

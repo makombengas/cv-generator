@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Education,
   Experience,
@@ -16,9 +18,9 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { FC, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 
-type ResumeProps = {
+interface ResumeProps {
   personalDetails: PersonalDetails;
   file?: File | null;
   theme?: string;
@@ -28,26 +30,24 @@ type ResumeProps = {
   setFile: (file: File | null) => void;
   skills?: Skill[];
   hobbies?: Hobby[];
- isPreviewModalOpen: boolean;
-   setIsPreviewModalOpen: (isOpen: boolean) => void;
-   download:boolean;
-   ref: React.RefObject<HTMLDivElement>;
-  
-};
-const Resume: FC<ResumeProps> = ({
+  isPreviewModalOpen: boolean;
+  setIsPreviewModalOpen: (isOpen: boolean) => void;
+  download: boolean;
+}
+
+const Resume = forwardRef<HTMLDivElement, ResumeProps>(({
   personalDetails,
   file,
   theme,
-  experiences,
-  educations,
-  languages,
-  skills,
-  hobbies,
+  experiences = [],
+  educations = [],
+  languages = [],
+  skills = [],
+  hobbies = [],
   download,
   setFile,
-  ref
-
-}) => {
+ 
+}, ref) => {
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
@@ -68,6 +68,9 @@ const Resume: FC<ResumeProps> = ({
           type: blob.type,
         });
         setFile(file);
+      })
+      .catch(error => {
+        console.error('Error loading default image:', error);
       });
   }, [setFile]);
 
@@ -91,7 +94,7 @@ const Resume: FC<ResumeProps> = ({
     return (
       <>
         {Array.from({ length: filledStars }, (_, index) => (
-          <Star key={index} className={`w-4 text-primary `} />
+          <Star key={index} className={`w-4 text-primary`} />
         ))}
         {Array.from({ length: maxStars - filledStars }, (_, index) => (
           <Star key={index + filledStars} className='w-4 text-gray-300' />
@@ -99,21 +102,24 @@ const Resume: FC<ResumeProps> = ({
       </>
     );
   };
-  const formulaireIntl = useTranslations('Form')
+
+  const formulaireIntl = useTranslations('Form');
+
   return (
     <div
       ref={ref}
-      className={`flex p-16 w-[950px] h-[1250px] shadow-lg ${download ? 'mb-10' : ''} `}
-      data-theme={theme}>
-      <div className='flex flex-col w-1/3 '>
-        <div className='ring ring-primary ring-offset-base-100 ring-offset-2 rounded-full border-8 border-primary overflow-hidden  h-80'>
+      className={`flex p-16 w-[950px] h-[1250px] shadow-lg ${download ? 'mb-10' : ''}`}
+      data-theme={theme}
+    >
+      <div className='flex flex-col w-1/3'>
+        <div className='ring ring-primary ring-offset-base-100 ring-offset-2 rounded-full border-8 border-primary overflow-hidden h-80'>
           {file && (
             <Image
               src={URL.createObjectURL(file)}
               width={500}
               height={500}
               alt='Picture of the author'
-              className='w-full object-cover  h-full  rounded-lg'
+              className='w-full object-cover h-full rounded-lg'
               onLoad={() => {
                 if (typeof file !== 'string') {
                   URL.revokeObjectURL(URL.createObjectURL(file));
@@ -122,16 +128,17 @@ const Resume: FC<ResumeProps> = ({
             />
           )}
         </div>
-        <div className='mt-4 flex flex-col  w-full'>
-          {/*Kontakt*/}
-          <div className=''>
+
+        <div className='mt-4 flex flex-col w-full'>
+          {/* Contact */}
+          <div>
             <h1 className='uppercase text-2xl font-bold my-4'>
               {formulaireIntl('contact')}
             </h1>
-            <ul className='space-y-4 '>
+            <ul className='space-y-4'>
               <li className='flex'>
                 <div className='break-all text-sm relative'>
-                  <div className='ml-8 '>{personalDetails.phone}</div>
+                  <div className='ml-8'>{personalDetails.phone}</div>
                   {personalDetails.phone && (
                     <div className='absolute top-0 left-0'>
                       <Phone className='w-5 text-primary' />
@@ -142,7 +149,7 @@ const Resume: FC<ResumeProps> = ({
 
               <li className='flex'>
                 <div className='break-all text-sm relative'>
-                  <div className='ml-8 '>{personalDetails.email}</div>
+                  <div className='ml-8'>{personalDetails.email}</div>
                   {personalDetails.email && (
                     <div className='absolute top-0 left-0'>
                       <Mail className='w-5 text-primary' />
@@ -153,7 +160,7 @@ const Resume: FC<ResumeProps> = ({
 
               <li className='flex'>
                 <div className='break-all text-sm relative'>
-                  <div className='ml-8 '>{personalDetails.address}</div>
+                  <div className='ml-8'>{personalDetails.address}</div>
                   {personalDetails.address && (
                     <div className='absolute top-0 left-0'>
                       <MapPinCheckInside className='w-5 text-primary' />
@@ -163,67 +170,65 @@ const Resume: FC<ResumeProps> = ({
               </li>
             </ul>
           </div>
-          {/*SKills*/}
-          <div className=''>
+
+          {/* Skills */}
+          <div>
             <h1 className='uppercase text-2xl font-bold my-4'>
               {formulaireIntl('skills')}
             </h1>
             <div className='flex max-w-[180px] flex-wrap gap-2'>
-              {skills &&
-                skills.map((skill) => (
-                  <div key={skill.id} className='flex items-center gap-2 '>
-                    <div aria-label="status" className="status status-primary"/>
-                    <span className='capitalize font-semibold  '>
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
+              {skills.map((skill) => (
+                <div key={skill.id} className='flex items-center gap-2'>
+                  <div aria-label="status" className="status status-primary"/>
+                  <span className='capitalize font-semibold'>
+                    {skill.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
-            {/*Hobbys*/}
-          <div className=''>
+          {/* Hobbies */}
+          <div>
             <h1 className='uppercase text-2xl font-bold my-4'>
               {formulaireIntl('hobbies')}
             </h1>
             <div className='flex w-full flex-wrap gap-2'>
-              {hobbies &&
-                hobbies.map((hobby) => (
-                  <div key={hobby.id} className='flex items-center gap-2  '>
-                    <div aria-label="status" className="status status-primary"/>
-                    <span className='capitalize font-semibold  '>
-                      {hobby.name}
-                    </span>
-                  </div>
-                ))}
+              {hobbies.map((hobby) => (
+                <div key={hobby.id} className='flex items-center gap-2'>
+                  <div aria-label="status" className="status status-primary"/>
+                  <span className='capitalize font-semibold'>
+                    {hobby.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
-               {/*Sprachen*/}
-          <div className=''>
+          {/* Languages */}
+          <div>
             <h1 className='uppercase text-2xl font-bold my-4'>
               {formulaireIntl('languages')}
             </h1>
             <div className='flex max-w-[180px] flex-col gap-2'>
-              {languages &&
-                languages.map((lang) => (
-                  <div key={lang.id} className='flex items-center gap-2 '>
-                    <div aria-label="status" className="status status-primary"/>
-                    <span className='capitalize font-semibold  '>
-                      {lang.language}
-                    </span>
-
-                    <div className='flex items-center ml-auto'>
-                      {getStarRating(lang.proficiency)}
-                    </div>
+              {languages.map((lang) => (
+                <div key={lang.id} className='flex items-center gap-2'>
+                  <div aria-label="status" className="status status-primary"/>
+                  <span className='capitalize font-semibold'>
+                    {lang.language}
+                  </span>
+                  <div className='flex items-center ml-auto'>
+                    {getStarRating(lang.proficiency)}
                   </div>
-                ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
       <div className='w-2/3 ml-8'>
-        <div className='w-full  flex flex-col space-y-4 '>
+        <div className='w-full flex flex-col space-y-4'>
           <h1 className='uppercase text-3xl font-bold'>
             {personalDetails.fullName}
           </h1>
@@ -235,96 +240,82 @@ const Resume: FC<ResumeProps> = ({
           </p>
         </div>
 
+        {/* Experience Section */}
         <section className='w-full h-fit mt-6'>
           <div>
             <h2 className='uppercase text-2xl font-bold mb-4'>
               {formulaireIntl('experience')}
             </h2>
             <ul className='space-y-6'>
-              {' '}
-              {/* Espacement entre les expériences */}
-              {experiences &&
-                experiences.map((experience, index) => (
-                  <li key={index} className='relative pl-8'>
-                    {' '}
-                    {/* Décalage pour la timeline */}
-                    {/* Point de la timeline */}
-                    <div className='absolute left-0 top-[.5rem] w-4 h-4 rounded-full bg-primary'></div>
-                    {/* Ligne verticale entre les points */}
-                    {index < experiences.length - 1 && (
-                      <div className='absolute left-[7px] top-5 bottom-[-1.5rem] w-0.5 bg-primary'></div>
-                    )}
-                    <div className='flex flex-col'>
-                      <p className='text-lg text-gray-600'>
-                        {formatDate(experience.startDate)} -{' '}
-                        {experience.endDate
-                          ? formatDate(experience.endDate)
-                          : 'Heute'}
-                      </p>
-                      <div className='flex items-center gap-2'>
-                        <BriefcaseBusiness className='w-5' />
-                        <h3 className='text-lg font-bold'>
-                          {experience.jobTitle}
-                        </h3>
-                      </div>
-                      <p className='text-lg uppercase'>
-                        {experience.companyName}
-                      </p>
-                      <p className=''>{experience.description}</p>
+              {experiences.map((experience, index) => (
+                <li key={index} className='relative pl-8'>
+                  <div className='absolute left-0 top-[.5rem] w-4 h-4 rounded-full bg-primary'></div>
+                  {index < experiences.length - 1 && (
+                    <div className='absolute left-[7px] top-5 bottom-[-1.5rem] w-0.5 bg-primary'></div>
+                  )}
+                  <div className='flex flex-col'>
+                    <p className='text-lg text-gray-600'>
+                      {formatDate(experience.startDate)} -{' '}
+                      {experience.endDate
+                        ? formatDate(experience.endDate)
+                        : 'Heute'}
+                    </p>
+                    <div className='flex items-center gap-2'>
+                      <BriefcaseBusiness className='w-5' />
+                      <h3 className='text-lg font-bold'>
+                        {experience.jobTitle}
+                      </h3>
                     </div>
-                  </li>
-                ))}
+                    <p className='text-lg uppercase'>
+                      {experience.companyName}
+                    </p>
+                    <p className=''>{experience.description}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </section>
 
-        {/* Espacement Éducation */}
-
+        {/* Education Section */}
         <section className='w-full h-fit mt-6'>
           <div>
             <h2 className='uppercase text-2xl font-bold mb-4'>
               {formulaireIntl('education')}
             </h2>
             <ul className='space-y-6'>
-              {' '}
-              {/* Espacement entre les expériences */}
-              {educations &&
-                educations.map((education, index) => (
-                  <li key={index} className='relative pl-8'>
-                    {' '}
-                    {/* Décalage pour la timeline */}
-                    {/* Point de la timeline */}
-                    <div className='absolute left-0 top-[.5rem] w-4 h-4 rounded-full bg-primary'></div>
-                    {/* Ligne verticale entre les points */}
-                    {index < educations.length - 1 && (
-                      <div className='absolute left-[7px] top-5 bottom-[-1.5rem] w-0.5 bg-primary'></div>
-                    )}
-                    <div className='flex flex-col'>
-                      <p className='text-lg text-gray-600'>
-                        {formatDate(education.startDate)} -{' '}
-                        {education.endDate
-                          ? formatDate(education.endDate)
-                          : 'Heute'}
-                      </p>
-
-                      <div className='flex items-center gap-2'>
-                        <GraduationCap className='w-5' />
-
-                        <h3 className='text-lg font-bold'>
-                          {education.degree}
-                        </h3>
-                      </div>
-                      <p className='text-lg uppercase'>{education.school}</p>
-                      <p className=''>{education.description}</p>
+              {educations.map((education, index) => (
+                <li key={index} className='relative pl-8'>
+                  <div className='absolute left-0 top-[.5rem] w-4 h-4 rounded-full bg-primary'></div>
+                  {index < educations.length - 1 && (
+                    <div className='absolute left-[7px] top-5 bottom-[-1.5rem] w-0.5 bg-primary'></div>
+                  )}
+                  <div className='flex flex-col'>
+                    <p className='text-lg text-gray-600'>
+                      {formatDate(education.startDate)} -{' '}
+                      {education.endDate
+                        ? formatDate(education.endDate)
+                        : 'Heute'}
+                    </p>
+                    <div className='flex items-center gap-2'>
+                      <GraduationCap className='w-5' />
+                      <h3 className='text-lg font-bold'>
+                        {education.degree}
+                      </h3>
                     </div>
-                  </li>
-                ))}
+                    <p className='text-lg uppercase'>{education.school}</p>
+                    <p className=''>{education.description}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </section>
       </div>
     </div>
   );
-};
+});
+
+Resume.displayName = 'Resume';
 
 export default Resume;

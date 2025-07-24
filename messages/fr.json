@@ -1,0 +1,64 @@
+{
+  "Error": {
+    "description": "<p>Un problème est survenu.</p><p>Tu peux essayer de <retry>recharger cette page</retry>.</p>",
+    "title": "Quelque chose s'est mal passé !"
+  },
+  "IndexPage": {
+    "description": "Ceci est un exemple qui démontre l'utilisation de <code>next-intl</code> avec le routeur d'application Next.js. Lorsque tu changes la langue en haut à droite, le contenu de cette page change.",
+    "title": "Exemple next-intl"
+  },
+  "LocaleLayout": {
+    "title": "Exemple next-intl"
+  },
+  "LocaleSwitcher": {
+    "label": "Changer de langue",
+    "locale": "{locale, select, de {🇩🇪 Allemand} en {🇺🇸 Anglais} fr {🇫🇷 Français}  other {Inconnu}}"
+  },
+  "Manifest": {
+    "name": ""
+  },
+  "Form": {
+    "titleOne": "Curriculum Vitae",
+    "titleTwo": "Générateur",
+    "contact": "Contact",
+    "question": "Qui es-tu ?",
+    "preview": "Aperçu",
+    "experience": "Expérience professionnelle",
+    "education": "Formation",
+    "languages": "Langues",
+    "skills": "Compétences",
+    "hobbies": "Loisirs",
+    "add": "Ajouter"
+  },
+  "Experiences": {
+    "companyName": "Nom de l'entreprise",
+    "jobTitle": "Intitulé du poste",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "description": "Description"
+  },
+  "Educations": {
+    "schoolName": "Nom de l'école",
+    "degree": "Programme d'études",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "description": "Description"
+  },
+  "Language": {
+    "lang": "Langues",
+    "choose": "Choisissez votre niveau de langue",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé"
+  },
+  "Skills": {
+    "skillName": "Vos compétences"
+  },
+  "Hobbies": {
+    "hobbyName": "Vos loisirs"
+  },
+  "Download": {
+    "download": "Télécharger",
+    "choose": "Choisir un fichier"
+  }
+}

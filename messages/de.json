@@ -1,0 +1,66 @@
+{
+    "Error": {
+    "description": "<p>Es ist leider ein Problem aufgetreten.</p><p>Du kannst versuchen <retry>diese Seite neu zu laden</retry>.</p>",
+    "title": "Etwas ist schief gelaufen!"
+  },
+  "IndexPage": {
+    "description": "Dies ist ein Beispiel, das die Verwendung von <code>next-intl</code> mit dem Next.js App Router demonstriert. Bei Ändern der Sprache rechts oben ändert sich der Inhalt dieser Seite.",
+    "title": "next-intl Beispiel"
+  },
+  "LocaleLayout": {
+    "title": "next-intl Beispiel"
+  },
+  "LocaleSwitcher": {
+    "label": "Sprache ändern",
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} fr {🇫🇷 Französich}  other {Unbekannt}}"
+  },
+  "Manifest": {
+    "name": ""
+  },
+   "Form":{
+    "titleOne": "Lebenslauf",
+    "titleTwo": "Generator",
+    "contact": "Kontakt",
+    "question": "Wer bist du?",
+    "preview": "Vorschau",
+    "experience": "Berufserfahrung",
+    "education": "Bildung",
+    "languages": "Sprachen",
+    "skills": "Fähigkeiten",
+    "hobbies": "Hobbys",
+    "add": "Hinzufügen"
+    
+    
+  },
+  "Experiences":{
+    "companyName": "Name der Firma",
+    "jobTitle": "Berufsbezeichnung",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "description": "Beschreibung"
+  },
+  "Educations":{
+      "schoolName": "Name der Schule",
+    "degree": "Ihre Studiengang",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "description": "Beschreibung"
+  },
+  "Language": {
+    "lang":"Sprachen",
+    "choose":"Wählen Sie ihre Sprachkenntnisse",
+    "beginner":"Anfänger",
+    "intermediate":"Mittelstufe",
+    "advanced":"Fortgeschritten" 
+  },
+  "Skills":{
+    "skillName": "Ihre Fähigkeiten"
+  },
+  "Hobbies":{
+    "hobbyName": "Ihre Hobbys"
+  },
+  "Download": {
+    "download": "Herunterladen",
+    "choose": " Datei auswählen"
+  }
+}

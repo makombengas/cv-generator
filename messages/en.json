@@ -1,0 +1,65 @@
+{
+     "Error": {
+    "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+    "title": "Something went wrong!"
+  },
+  "IndexPage": {
+    "description": "This is a basic example that demonstrates the usage of <code>next-intl</code> with the Next.js App Router. Try changing the locale in the top right corner and see how the content changes.",
+    "title": "next-intl example"
+  },
+  "LocaleLayout": {
+    "title": "next-intl example"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, de {🇩🇪 Deutsch} en {🇺🇸 English} fr {🇫🇷 French}  other {Unknown}}"
+  },
+  "Manifest": {
+    "name": "next-intl example"
+  },
+  "Form":{
+    "titleOne": "CV",
+    "titleTwo": "Generator",
+    "contact": "Contact",
+    "question": "Who are you?",
+    "preview": "Preview",
+    "experience": "Work Experience",
+    "education": "Education",
+    "languages": "Languages",
+    "skills": "Skills",
+    "hobbies": "Hobbies",
+    "add":"Add"
+    
+  },
+  "Experiences":{
+   "companyName": "Company Name",
+   "jobTitle": "Job Title",
+   "startDate": "Start Date",
+   "endDate": "End Date",
+   "description": "Description"
+  },
+  "Educations":{
+   "schoolName": "School Name",
+   "degree": "Your degree program",
+   "startDate": "Start Date",
+   "endDate": "End Date",
+   "description": "Description"
+  },
+  "Language": {
+    "lang":"Languages",
+    "choose":"Choose your level of proficiency",
+    "beginner":"Beginner",
+    "intermediate":"Intermediate",
+    "advanced":"Advanced"
+  },
+  "Skills":{
+    "skillName": "Your skills"
+  },
+   "Hobbies":{
+    "hobbyName": "Your hobbies"
+  },
+  "Download":{
+    "download":"Download",
+    "choose": "Choose a file"
+  }
+}
